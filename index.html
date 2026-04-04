@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Muhammad Rehan — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cream:   #f4f0e8;
+      --ink:     #151210;
+      --rust:    #c0471e;
+      --gold:    #d4a843;
+      --muted:   #7a7168;
+      --card-bg: #fffdf8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999; opacity: 0.45;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 4rem; z-index: 100;
+      backdrop-filter: blur(14px);
+      background: rgba(244,240,232,0.88);
+      border-bottom: 1px solid rgba(26,22,18,0.07);
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.35rem; color: var(--ink); text-decoration: none;
+    }
+    .nav-logo span { color: var(--rust); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.82rem; font-weight: 500;
+      letter-spacing: 0.09em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--rust); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1.1fr 0.9fr;
+      align-items: center; padding: 8rem 4rem 4rem; gap: 4rem;
+    }
+    .hero-text { animation: fadeUp 0.85s ease both; }
+
+    .hero-eyebrow {
+      font-size: 0.78rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--rust);
+      font-weight: 500; margin-bottom: 1.2rem;
+      display: flex; align-items: center; gap: 0.7rem;
+    }
+    .hero-eyebrow::before {
+      content: ''; width: 2.2rem; height: 1px; background: var(--rust);
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.8rem, 5.5vw, 5rem);
+      line-height: 1.06; margin-bottom: 1.4rem;
+    }
+    h1 em { font-style: italic; color: var(--rust); }
+
+    .hero-desc {
+      font-size: 1rem; line-height: 1.82; color: var(--muted);
+      max-width: 460px; margin-bottom: 2.4rem;
+    }
+
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.82rem 1.7rem; font-size: 0.82rem; font-weight: 500;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      border-radius: 2px; text-decoration: none;
+      cursor: pointer; border: none; transition: all 0.22s;
+    }
+    .btn-primary { background: var(--rust); color: #fff; }
+    .btn-primary:hover {
+      background: #a53819;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(192,71,30,0.32);
+    }
+    .btn-outline { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
+    .btn-outline:hover { background: var(--ink); color: var(--cream); }
+
+    /* ── HERO VISUAL ── */
+    .hero-visual {
+      display: flex; flex-direction: column; align-items: center; gap: 2rem;
+      animation: fadeUp 0.85s 0.18s ease both;
+    }
+    .avatar-wrap { position: relative; width: 300px; height: 370px; }
+    .avatar-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--rust) 100%);
+      border-radius: 200px 200px 150px 150px;
+      opacity: 0.13; transform: rotate(-4deg);
+    }
+    .avatar-circle {
+      position: absolute; inset: 18px;
+      background: linear-gradient(160deg, #e8dfd0, #d1c5b4);
+      border-radius: 180px 180px 130px 130px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5.5rem;
+    }
+    .avatar-badge {
+      position: absolute; bottom: 20px; right: -22px;
+      background: var(--card-bg);
+      border: 1px solid rgba(26,22,18,0.1);
+      border-radius: 50px; padding: 0.55rem 1.1rem;
+      font-size: 0.74rem; font-weight: 500;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.09);
+      white-space: nowrap;
+    }
+    .avatar-badge span { color: var(--rust); }
+
+    .hero-stats { display: flex; gap: 2.5rem; }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.9rem; color: var(--ink); display: block;
+    }
+    .stat-label { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* ── ABOUT ── */
+    .about { background: var(--ink); color: var(--cream); padding: 6rem 4rem; }
+    .section-label {
+      font-size: 0.74rem; letter-spacing: 0.2em;
+      text-transform: uppercase; font-weight: 500; margin-bottom: 0.7rem;
+    }
+    .about .section-label { color: var(--gold); }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+      line-height: 1.18; margin-bottom: 3rem;
+    }
+    .about .section-title { color: var(--cream); }
+
+    .about-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 5rem; align-items: start; }
+    .about-text { font-size: 0.97rem; line-height: 1.95; color: rgba(244,240,232,0.72); }
+    .about-text p + p { margin-top: 1.1rem; }
+    .about-highlight { color: var(--gold); font-weight: 500; }
+
+    .vision-box {
+      margin-top: 1.8rem;
+      padding: 1.2rem 1.4rem;
+      border-left: 3px solid var(--rust);
+      background: rgba(255,255,255,0.04);
+      border-radius: 0 4px 4px 0;
+      font-size: 0.93rem;
+      color: rgba(244,240,232,0.85);
+      font-style: italic;
+      line-height: 1.78;
+    }
+
+    .skills-list { display: flex; flex-direction: column; gap: 1.3rem; }
+    .skill-item { display: flex; flex-direction: column; gap: 0.45rem; }
+    .skill-header {
+      display: flex; justify-content: space-between;
+      font-size: 0.82rem; font-weight: 500; color: rgba(244,240,232,0.9);
+    }
+    .skill-bar { height: 3px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; }
+    .skill-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--rust));
+      border-radius: 2px;
+      animation: barGrow 1.2s ease both;
+    }
+
+    /* ── PROJECTS ── */
+    .projects { padding: 6rem 4rem; }
+    .projects .section-label { color: var(--rust); }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 1.4rem;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(26,22,18,0.08);
+      border-radius: 4px; padding: 2rem;
+      transition: all 0.24s; position: relative; overflow: hidden;
+      display: flex; flex-direction: column;
+    }
+    .project-card::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--rust), var(--gold));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .project-card:hover { transform: translateY(-5px); box-shadow: 0 14px 40px rgba(0,0,0,0.1); }
+    .project-card:hover::before { transform: scaleX(1); }
+    .project-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .project-title { font-family: 'DM Serif Display', serif; font-size: 1.25rem; margin-bottom: 0.55rem; }
+    .project-desc { font-size: 0.88rem; line-height: 1.68; color: var(--muted); margin-bottom: 1.2rem; flex: 1; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.2rem; }
+    .tag {
+      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.06em;
+      padding: 0.22rem 0.62rem; border-radius: 2px;
+      background: rgba(192,71,30,0.07); color: var(--rust);
+      border: 1px solid rgba(192,71,30,0.14);
+    }
+
+    /* live badge on featured card */
+    .project-card.featured { border-color: rgba(192,71,30,0.2); }
+    .live-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.72rem; font-weight: 500; color: #16a34a;
+      background: rgba(22,163,74,0.08); border: 1px solid rgba(22,163,74,0.2);
+      border-radius: 50px; padding: 0.2rem 0.65rem; margin-bottom: 0.8rem;
+      width: fit-content;
+    }
+    .live-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #16a34a;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    .project-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.78rem; font-weight: 500; color: var(--rust);
+      text-decoration: none; margin-top: auto;
+      transition: gap 0.2s;
+    }
+    .project-link:hover { gap: 0.7rem; }
+
+    /* ── CONTACT ── */
+    .contact { background: var(--ink); color: var(--cream); padding: 6rem 4rem; text-align: center; }
+    .contact .section-label { color: var(--gold); }
+    .contact .section-title { color: var(--cream); margin: 0 auto 1rem; }
+    .contact-sub { color: rgba(244,240,232,0.6); font-size: 0.97rem; margin-bottom: 2.5rem; }
+    .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .contact .btn-outline { color: var(--cream); border-color: rgba(244,240,232,0.35); }
+    .contact .btn-outline:hover { background: var(--cream); color: var(--ink); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 1.8rem;
+      font-size: 0.76rem; color: var(--muted);
+      border-top: 1px solid rgba(26,22,18,0.08);
+      background: var(--cream);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes barGrow {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(1.3); }
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; text-align: center; }
+      .hero-eyebrow { justify-content: center; }
+      .hero-desc { margin: 0 auto 2rem; }
+      .hero-actions { justify-content: center; }
+      .hero-visual { display: none; }
+      .about { padding: 4rem 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .projects { padding: 4rem 1.5rem; }
+      .contact { padding: 4rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">M<span>.</span>Rehan</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <p class="hero-eyebrow">BS IT · Superior University Lahore</p>
+      <h1>Hi, I'm<br><em>Muhammad<br>Rehan</em> 👋</h1>
+      <p class="hero-desc">
+        A future software developer with a passion for turning bold ideas into
+        real digital solutions. I don't just study technology — I use it to solve
+        the real-world problems that everyone ignores.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">View My Work →</a>
+        <a href="#contact" class="btn btn-outline">Get In Touch</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="avatar-wrap">
+        <div class="avatar-bg"></div>
+        <div class="avatar-circle">👨‍💻</div>
+        <div class="avatar-badge">🏢 Future <span>Software House</span> Founder</div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">BS</span>
+          <span class="stat-label">IT Student</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">∞</span>
+          <span class="stat-label">Ideas</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">1st</span>
+          <span class="stat-label">GitHub Repo</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <p class="section-label">About Me</p>
+    <h2 class="section-title">Turning ideas into<br><em style="font-style:italic">reality.</em></h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm <span class="about-highlight">Muhammad Rehan</span>, a BS IT student at
+          <span class="about-highlight">Superior University Lahore</span>. I'm passionate
+          about technology and driven by one simple goal — to build software that
+          actually matters to people.
+        </p>
+        <p>
+          My biggest hobby is <span class="about-highlight">researching new innovations</span>
+          and converting ideas into reality. I'm fascinated by the problems that exist
+          all around us in everyday life — the ones people have normalized and stopped
+          noticing. Those are exactly the problems I want to solve.
+        </p>
+        <p>
+          I believe every real-life problem deserves a modern digital solution, and I'm
+          on a mission to find them, build them, and ship them.
+        </p>
+        <div class="vision-box">
+          "My dream is to become a successful developer and one day build my own software
+          house — creating modern solutions for the real-world problems that people
+          normally ignore."
+        </div>
+      </div>
+
+      <div>
+        <div class="skills-list">
+          <div class="skill-item">
+            <div class="skill-header"><span>HTML & CSS</span><span>Learning 📈</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span>JavaScript</span><span>Learning 📈</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:45%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span>Problem Solving</span><span>Strong 💪</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span>Research & Innovation</span><span>Expert 🔬</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span>Git & GitHub</span><span>Beginner 🌱</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:40%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="projects" id="projects">
+    <p class="section-label">My Work</p>
+    <h2 class="section-title">Projects I've<br>built & launched.</h2>
+    <div class="projects-grid">
+
+      <!-- LIVE PROJECT -->
+      <div class="project-card featured">
+        <div class="live-badge"><span class="live-dot"></span> Live Project</div>
+        <div class="project-icon">🌐</div>
+        <h3 class="project-title">Abdullah's Portfolio</h3>
+        <p class="project-desc">
+          A fully live portfolio website I designed and built — showcasing clean layout,
+          smooth navigation, and a professional personal brand. Deployed and accessible on the web.
+        </p>
+        <div class="project-tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Web Design</span>
+          <span class="tag">Live</span>
+        </div>
+        <a href="https://abdullahportfolio.free.nf/" target="_blank" class="project-link">
+          Visit Live Site →
+        </a>
+      </div>
+
+      <!-- THIS PORTFOLIO -->
+      <div class="project-card">
+        <div class="project-icon">🧑‍💻</div>
+        <h3 class="project-title">My Portfolio</h3>
+        <p class="project-desc">
+          My personal portfolio website — the first project I pushed to GitHub.
+          Built from scratch with HTML, CSS & JavaScript to showcase who I am and what I build.
+        </p>
+        <div class="project-tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">First GitHub Repo</span>
+        </div>
+      </div>
+
+      <!-- VISION -->
+      <div class="project-card">
+        <div class="project-icon">🏢</div>
+        <h3 class="project-title">Software House Vision</h3>
+        <p class="project-desc">
+          The ultimate goal. Every line of code I write today is a step toward founding
+          my own software house — creating solutions the world doesn't know it needs yet.
+        </p>
+        <div class="project-tags">
+          <span class="tag">Vision</span>
+          <span class="tag">Long-term</span>
+          <span class="tag">In Progress</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <p class="section-label">Say Hello</p>
+    <h2 class="section-title">Let's connect<br>& build something.</h2>
+    <p class="contact-sub">Have an idea, a project, or just want to talk tech? I'm always up for a good conversation.</p>
+    <div class="contact-links">
+      <a href="mailto:mrehanch11@gmail.com" class="btn btn-primary">✉️ mrehanch11@gmail.com</a>
+      <a href="https://github.com/mrehanch11-gif" target="_blank" class="btn btn-outline">🐙 GitHub</a>
+      <a href="https://linkedin.com/in/muhammad-rehan" target="_blank" class="btn btn-outline">💼 LinkedIn</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Crafted with passion by <strong>Muhammad Rehan</strong> · Superior University Lahore · BS IT · 2025 🚀</p>
+  </footer>
+
+</body>
+</html>
